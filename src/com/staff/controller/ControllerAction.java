@@ -37,14 +37,11 @@ public class ControllerAction extends HttpServlet {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		requestPro(request, response); // get방식과 post방식을 모두 requestPro로 처리
-		System.out.println("들ㅁ옴ㅁㅁ");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		requestPro(request, response);
-		System.out.println("sㅁaㅁ");
-		System.out.println(response.toString());
 
 	}
 
