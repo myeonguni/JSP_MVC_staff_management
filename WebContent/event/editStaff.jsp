@@ -9,7 +9,7 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<!-- 직원 추가 양식 -->
+<!-- 직원 편집 양식 -->
 <div class="container">
 	<form class="form-horizontal">
 		<div class="form-group">
@@ -27,7 +27,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="name">Name:</label>
+			<label class="control-label col-sm-2" for="name">Nadme:</label>
 			<div class="col-sm-10">
 				<input type="text" id="name" name="name" class="form-control"
 					placeholder="Enter name">
@@ -47,17 +47,27 @@
 					placeholder="Enter xxx@xxx.xxx">
 			</div>
 		</div>
+		<input type="hidden" id="index" name="index" class="form-control">
 		<hr>
 	</form>
 		<div class="text-right">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button onclick="formCheck()" class="btn btn-default">추가하기</button>
+				<button onclick="formCheck()" class="btn btn-default">수정하기</button>
 			</div>
 		</div>
 </div>
 
 
 <script>
+	/* 폼 편집 초기 값 로드 */
+	function editInit(index, position, name, tel, email) {
+		$("#index").val(index);
+		$("#position").val(position);
+		$("#name").val(name);
+		$("#tel").val(tel);
+		$("#email").val(email);
+	}
+	
 	/* 폼 입력 값 유효성 체크 */
 	function formCheck() {
 		// 입력 값 유효성 체크1: 값을 입력하였는지 → 아래 루프 코드 참고
@@ -84,16 +94,17 @@
 		}
 	}
 
-	/* 직원 추가 이벤트에 따른 비동기통신 실시 */
+	/* 직원 편집 이벤트에 따른 비동기통신 실시 */
 	function formSubmit() {
 		var params = { // JSON 포맷으로 생성 
+			index : $("#index").val(),
 			name : $("#name").val(),
 			position : $("#position").val(),
 			tel : $("#tel").val(),
 			email : $("#email").val()
 		}
 		$.ajax({
-			url : 'http://localhost:8080/staff_mng/event/addStaffAjax.do',
+			url : 'http://localhost:8080/staff_mng/event/editStaffAjax.do',
 			type : 'POST',
 			data : params,
 			success : ajaxSuccess,
@@ -101,18 +112,18 @@
 		});
 	}
 
-	/* 직원 추가 이벤트에 따른 비동기통신이 성공일 경우 */
+	/* 직원 편집 이벤트에 따른 비동기통신이 성공일 경우 */
 	function ajaxSuccess(resdata) {
 		if (resdata == "true") {
 			// 데이타 성공일때 이벤트 작성
-			alert("추가 되었습니다.");
+			alert("수정 되었습니다.");
 			parent.staffAddModalClose();
 		} else { //false일 경우
 			alert("유효하지 않은 요청입니다. 확인 후 다시 요청하여주세요.");
 		}
 	}
 
-	/* 직원 추가 이벤트에 따른 비동기통신이 실패일 경우 */
+	/* 직원 편집 이벤트에 따른 비동기통신이 실패일 경우 */
 	function ajaxError() {
 		alert("유효하지 않은 요청입니다. 확인 후 다시 요청하여주세요.");
 	}
