@@ -23,12 +23,15 @@
 			<div class="col-sm-10">
 				<!-- 페이지 타이틀 -->
 				<div class="text-center">
-					<h2>명우니닷컴 - 직원 관리 프로그램</h2>
+					<h2>(주)컴트루테크놀로 - 직원 관리 프로그램</h2>
 				</div>
 				<!-- 카테고리 별 검색 -->
-				<div style="height:80px; background-image: url('resource/logo.png'); background-repeat:no-repeat; background-size: 100px 80px;">
-					<br><br>
-					<form class="form-inline" action="http://localhost:8080/staff_mng/listSearch.do" method="post">
+				<div
+					style="height: 80px; background-image: url('resource/logo.png'); background-repeat: no-repeat; background-size: 100px 80px;">
+					<br> <br>
+					<form class="form-inline"
+						action="http://localhost:8080/staff_mng/listSearch.do"
+						method="post">
 						<div class="text-right">
 							<div class="form-group">
 								<select class="form-control" id="category" name="category">
@@ -40,8 +43,8 @@
 								</select>&nbsp;
 							</div>
 							<div class="form-group">
-								<input type="text" id="searchTxt" name="searchTxt" class="form-control"
-									placeholder="Enter search">&nbsp;
+								<input type="text" id="searchTxt" name="searchTxt"
+									class="form-control" placeholder="Enter search">&nbsp;
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-default">
@@ -53,14 +56,38 @@
 				</div>
 				<hr>
 				<!-- 직원 추가 -->
-				<button type="button" class="btn btn-default btn-sm"
-					data-toggle="modal" data-target="#staffAddModal">
-					<span class="glyphicon glyphicon-plus"></span> 추가하기
-				</button>
+				<div class="col-sm-3 text-left" style="padding: 0px">
+					<button type="button" class="btn btn-default" data-toggle="modal"
+						data-target="#staffAddModal">
+						<span class="glyphicon glyphicon-plus"></span> 추가하기
+					</button>
+				</div>
+				<div class="col-sm-5"></div>
+				<!-- 다운로드(CSV,XLS,XLSX) -->
+				<div class="col-sm-4 text-right" style="padding: 0px">
+					<form class="form-inline"
+						action="http://localhost:8080/staff_mng/fileDown.do" method="get">
+						<div class="form-group">
+							<select class="form-control" id="extension" name="extension">
+								<option selected value="csv">CSV</option>
+								<option value="xls">XLS</option>
+								<!-- 
+									<option value="xlsx">XLSX(미지원)</option>
+								 -->
+							</select>&nbsp;
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-default">
+								<span class="glyphicon glyphicon-download-alt"></span> 다운로드
+							</button>
+						</div>
+					</form>
+				</div>
+				<br>
 				<hr>
 				<!-- 직원 리스트 -->
 				<div id="staffList" style="height: 700px; overflow: auto">
-					<table id="staffListContent"class="table table-striped">
+					<table id="staffListContent" class="table table-striped">
 						<tr>
 							<th>직원번호</th>
 							<th>직급</th>
@@ -99,14 +126,13 @@
 		</div>
 	</div>
 
-
 	<!-- 직원 추가 Modal-->
 	<div id="staffAddModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Adds Staff</h4>
+					<h4 class="modal-title">직원 추가하기</h4>
 				</div>
 				<div class="modal-body">
 					<iframe name="add"
@@ -123,7 +149,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Edit Staff</h4>
+					<h4 class="modal-title">직원 편집하기</h4>
 				</div>
 				<div class="modal-body">
 					<iframe name="edit"
@@ -140,9 +166,9 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Delete Staff</h4>
+					<h4 class="modal-title">직원 삭제하기</h4>
 				</div>
-				<div class="modal-body" style="height: 120px">
+				<div class="modal-body" style="height: 130px">
 					<iframe name="del"
 						src="http://localhost:8080/staff_mng/event/deleteStaff.jsp"
 						width="100%" height="100px" style="border: 0 solid #FFFFFF;"></iframe>
