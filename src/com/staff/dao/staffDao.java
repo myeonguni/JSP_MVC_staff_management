@@ -12,10 +12,31 @@ public class staffDao extends CommonDao {
 		return _instance;
 	}
 	
-	/* 직원 리스트 조회 */
-	public ArrayList<staff> getStaffList() throws SQLException {
+	/* 직원 리스트 조회(전체) */
+	public ArrayList<staff> getStaffListAll() throws SQLException {
         ResultSet rs = null;
         String sql = "select * from stafflist order by stafflist_name asc";
+        rs = openConnection().executeQuery(sql); // sql을 실행하기위해 연결을 열어 쿼리를 실행하고 rs에 반환
+        ArrayList<staff> StaffList = new ArrayList<staff>();// staff형 배열객체를 선언
+ 
+        while (rs.next()) { 
+        	staff Staff = new staff();// 데이터들을 담기위해 staff객체에 메모리를 할당
+			Staff.setIndex(rs.getString("stafflist_index"));
+			Staff.setName(rs.getString("stafflist_name"));
+			Staff.setPosition(rs.getString("stafflist_position"));
+			Staff.setTel(rs.getString("stafflist_tel"));
+			Staff.setEmail(rs.getString("stafflist_email"));     
+            StaffList.add(Staff);// 셋팅된 빈을 리스트에 추가
+        }
+        closeConnection();
+        return StaffList;
+    }
+	
+	/* 직원 리스트 조회(검색) */
+	public ArrayList<staff> getStaffListSearch(String category, String searchTxt) throws SQLException {
+        ResultSet rs = null;
+        
+        String sql = "select * from stafflist where "+category+" like '%"+searchTxt+"%' order by stafflist_name asc";
         rs = openConnection().executeQuery(sql); // sql을 실행하기위해 연결을 열어 쿼리를 실행하고 rs에 반환
         ArrayList<staff> StaffList = new ArrayList<staff>();// staff형 배열객체를 선언
  

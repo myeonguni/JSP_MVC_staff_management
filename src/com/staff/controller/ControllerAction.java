@@ -36,11 +36,13 @@ public class ControllerAction extends HttpServlet {
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		requestPro(request, response); // get방식과 post방식을 모두 requestPro로 처리
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		requestPro(request, response);
 
 	}
