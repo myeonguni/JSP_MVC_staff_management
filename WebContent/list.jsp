@@ -23,7 +23,7 @@
 			<div class="col-sm-10">
 				<!-- 페이지 타이틀 -->
 				<div class="text-center">
-					<h2>(주)컴트루테크놀로 - 직원 관리 프로그램</h2>
+					<h2>명우니닷컴 - 직원 관리 프로그램</h2>
 				</div>
 				<!-- 카테고리 별 검색 -->
 				<div style="height:80px; background-image: url('resource/logo.png'); background-repeat:no-repeat; background-size: 100px 80px;">
