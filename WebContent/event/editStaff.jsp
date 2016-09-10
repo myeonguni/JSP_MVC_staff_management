@@ -13,7 +13,7 @@
 <div class="container">
 	<form class="form-horizontal">
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="position">Position:</label>
+			<label class="control-label col-sm-2" for="position">직급:</label>
 			<div class="col-sm-10">
 				<select class="form-control" id="position" name="position">
 					<option selected value="사원">사원</option>
@@ -27,21 +27,21 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="name">Nadme:</label>
+			<label class="control-label col-sm-2" for="name">이름:</label>
 			<div class="col-sm-10">
 				<input type="text" id="name" name="name" class="form-control"
 					placeholder="Enter name">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="tel">Tel:</label>
+			<label class="control-label col-sm-2" for="tel">전화번호:</label>
 			<div class="col-sm-10">
 				<input type="tel" id="tel" name="tel" class="form-control"
 					placeholder="Enter xxx-xxxx-xxxx">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="email">Email:</label>
+			<label class="control-label col-sm-2" for="email">이메일:</label>
 			<div class="col-sm-10">
 				<input type="email" id="email" name="email" class="form-control"
 					placeholder="Enter xxx@xxx.xxx">

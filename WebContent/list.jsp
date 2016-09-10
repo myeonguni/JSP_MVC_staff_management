@@ -1,62 +1,95 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html5>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-	<title>À¥ ÇÃ·§Æû ±â¹İ Á÷¿ø°ü¸® Åø</title>
-	<!-- BootStrap, JQuery load -->
-	<link rel="stylesheet"
-		href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script
-		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ê³¼ì œ - ì§ì›ê´€ë¦¬ íˆ´</title>
+<!-- BootStrap, JQuery load -->
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
+				<!-- í˜ì´ì§€ íƒ€ì´í‹€ -->
+				<div class="text-center">
+					<h2>(ì£¼)ì»´íŠ¸ë£¨í…Œí¬ë†€ë¡œ - ì§ì› ê´€ë¦¬ í”„ë¡œê·¸ë¨</h2>
+				</div>
+				<!-- ì¹´í…Œê³ ë¦¬ ë³„ ê²€ìƒ‰ -->
+				<div style="height:80px; background-image: url('resource/logo.png'); background-repeat:no-repeat; background-size: 100px 80px;">
+					<br><br>
+					<form class="form-inline" action="http://localhost:8080/staff_mng/listSearch.do" method="post">
+						<div class="text-right">
+							<div class="form-group">
+								<select class="form-control" id="category" name="category">
+									<option selected value="stafflist_index">ì§ì›ë²ˆí˜¸</option>
+									<option value="stafflist_position">ì§ê¸‰</option>
+									<option value="stafflist_name">ì´ë¦„</option>
+									<option value="stafflist_tel">ì „í™”ë²ˆí˜¸</option>
+									<option value="stafflist_email">ì´ë©”ì¼</option>
+								</select>&nbsp;
+							</div>
+							<div class="form-group">
+								<input type="text" id="searchTxt" name="searchTxt" class="form-control"
+									placeholder="Enter search">&nbsp;
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-default">
+									<span class="glyphicon glyphicon-search"></span> ê²€ìƒ‰í•˜ê¸°
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
 				<hr>
-				<!-- Á÷¿ø Ãß°¡ -->
-				<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#staffAddModal">
-					<span class="glyphicon glyphicon-plus"></span> Add
+				<!-- ì§ì› ì¶”ê°€ -->
+				<button type="button" class="btn btn-default btn-sm"
+					data-toggle="modal" data-target="#staffAddModal">
+					<span class="glyphicon glyphicon-plus"></span> ì¶”ê°€í•˜ê¸°
 				</button>
 				<hr>
-				<!-- Á÷¿ø ¸®½ºÆ® -->
-				<div style="height: 700px; overflow: auto">
-					<table class="table table-hover">
+				<!-- ì§ì› ë¦¬ìŠ¤íŠ¸ -->
+				<div id="staffList" style="height: 700px; overflow: auto">
+					<table id="staffListContent"class="table table-striped">
 						<tr>
-							<th>Á÷¿ø¹øÈ£</th>
-							<th>Á÷±Ş</th>
-							<th>ÀÌ¸§</th>
-							<th>ÀüÈ­sds¹øÈ£</th>
-							<th>ÀÌ¸ŞÀÏ</th>
-							<th class="text-center">¼öÁ¤</th>
-							<th class="text-center">»èÁ¦</th>
+							<th>ì§ì›ë²ˆí˜¸</th>
+							<th>ì§ê¸‰</th>
+							<th>ì´ë¦„</th>
+							<th>ì „í™”ë²ˆí˜¸</th>
+							<th>ì´ë©”ì¼</th>
+							<th class="text-center">ìˆ˜ì •</th>
+							<th class="text-center">ì‚­ì œ</th>
 						</tr>
 						<c:forEach items="${StaffList}" var="Staff">
 							<tr>
-								<!-- jstlÀÇ Ç¥Çö½ÄÀº ½ºÅ©¸³Æ®¸´°ú ¼Ó¼ºÀÌ °°¾Æ¼­ ¾îµğ¿¡¾²³ª ¿ì¼±µÊ -->
+								<!-- jstlì˜ í‘œí˜„ì‹ì€ ìŠ¤í¬ë¦½íŠ¸ë¦¿ê³¼ ì†ì„±ì´ ê°™ì•„ì„œ ì–´ë””ì—ì“°ë‚˜ ìš°ì„ ë¨ -->
 								<td>${Staff.index}</td>
 								<td>${Staff.position}</td>
 								<td>${Staff.name}</td>
 								<td>${Staff.tel}</td>
 								<td>${Staff.email}</td>
 								<td class="text-center">
-									<button type="button" class="btn btn-default btn-sm" onClick="staffEditOpen('${Staff.index}','${Staff.position}','${Staff.name}','${Staff.tel}','${Staff.email}')">
-							        	<span class="glyphicon glyphicon-edit"></span>
-							        </button>
-						        </td>
+									<button type="button" class="btn btn-default btn-sm"
+										onClick="staffEditOpen('${Staff.index}','${Staff.position}','${Staff.name}','${Staff.tel}','${Staff.email}')">
+										<span class="glyphicon glyphicon-edit"></span>
+									</button>
+								</td>
 								<td class="text-center" id="${Staff.index}">
-									<button type="button" class="btn btn-default btn-sm" onClick="staffDeleteOpen('${Staff.index}')">
-							        	<span class="glyphicon glyphicon-remove"></span>
-							        </button>
-						        </td>
+									<button type="button" class="btn btn-default btn-sm"
+										onClick="staffDeleteOpen('${Staff.index}')">
+										<span class="glyphicon glyphicon-remove"></span>
+									</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -65,9 +98,9 @@
 			<div class="col-sm-1"></div>
 		</div>
 	</div>
-	
-	
-	<!-- Á÷¿ø Ãß°¡ Modal-->
+
+
+	<!-- ì§ì› ì¶”ê°€ Modal-->
 	<div id="staffAddModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -76,13 +109,15 @@
 					<h4 class="modal-title">Adds Staff</h4>
 				</div>
 				<div class="modal-body">
-					<iframe name="add" src="http://localhost:8080/staff_mng/event/addStaff.jsp" width="100%" height="370px" style="border:0 solid #FFFFFF;"></iframe>
+					<iframe name="add"
+						src="http://localhost:8080/staff_mng/event/addStaff.jsp"
+						width="100%" height="370px" style="border: 0 solid #FFFFFF;"></iframe>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<!-- Á÷¿ø ÆíÁı Modal-->
+
+	<!-- ì§ì› í¸ì§‘ Modal-->
 	<div id="staffEditModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -91,13 +126,15 @@
 					<h4 class="modal-title">Edit Staff</h4>
 				</div>
 				<div class="modal-body">
-					<iframe name="edit" src="http://localhost:8080/staff_mng/event/editStaff.jsp" width="100%" height="370px" style="border:0 solid #FFFFFF;"></iframe>
+					<iframe name="edit"
+						src="http://localhost:8080/staff_mng/event/editStaff.jsp"
+						width="100%" height="370px" style="border: 0 solid #FFFFFF;"></iframe>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<!-- Á÷¿ø »èÁ¦ Modal-->
+
+	<!-- ì§ì› ì‚­ì œ Modal-->
 	<div id="staffDeleteModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -105,41 +142,41 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Delete Staff</h4>
 				</div>
-				<div class="modal-body" style="height:120px">
-					<iframe name="del" src="http://localhost:8080/staff_mng/event/deleteStaff.jsp" width="100%" height="100px" style="border:0 solid #FFFFFF;"></iframe>
+				<div class="modal-body" style="height: 120px">
+					<iframe name="del"
+						src="http://localhost:8080/staff_mng/event/deleteStaff.jsp"
+						width="100%" height="100px" style="border: 0 solid #FFFFFF;"></iframe>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
-		/* Á÷¿øÃß°¡ Á¾·á: iframe(ÀÚ½ÄÆäÀÌÁö)¿¡¼­ ºÎ¸ğÀÇ ÇÔ¼ö¸¦ È£ÃâÇÏ±â À§ÇÔ=parent.staffAddModalClose() */
+		/* ì§ì› ì¶”ê°€, í¸ì§‘, ì‚­ì œ ê´€ë ¨ í•¨ìˆ˜ */
 		function staffAddModalClose() {
 			$('#staffAddModal').modal('toggle');
-			//Ãß°¡µÈ Á÷¿ø¿¡ µû¸¥ ¸®·Îµå
-			location.href='http://localhost:8080/staff_mng/list.do';
+			//ì¶”ê°€ëœ ì§ì›ì— ë”°ë¥¸ ë¦¬ë¡œë“œ
+			location.href = 'http://localhost:8080/staff_mng/listAll.do';
 		}
-		
+
 		function staffEditOpen(index, position, name, tel, email) {
 			edit.editInit(index, position, name, tel, email);
 			$('#staffEditModal').modal('toggle');
 		}
-		
+
 		function staffEditModalClose() {
 			$('#staffEditModal').modal('toggle');
-			//¾÷µ¥ÀÌÆ®µÈ Á÷¿ø¿¡ µû¸¥ ¸®·Îµå
-			location.href='http://localhost:8080/staff_mng/list.do';
+			location.href = 'http://localhost:8080/staff_mng/listAll.do';
 		}
 
 		function staffDeleteOpen(index) {
 			del.deleteInit(index);
 			$('#staffDeleteModal').modal('toggle');
 		}
-		
+
 		function staffDeleteModalClose() {
 			$('#staffDeleteModal').modal('toggle');
-			//»èÁ¦µÈ Á÷¿ø¿¡ µû¸¥ ¸®·Îµå
-			location.href='http://localhost:8080/staff_mng/list.do';
+			location.href = 'http://localhost:8080/staff_mng/listAll.do';
 		}
 	</script>
 </body>
