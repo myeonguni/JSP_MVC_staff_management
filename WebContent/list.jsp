@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>과제 - 직원관리 툴</title>
+<title>명우니닷컴 - 직원관리 툴</title>
 <!-- BootStrap, JQuery load -->
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 			<div class="col-sm-10">
 				<!-- 페이지 타이틀 -->
 				<div class="text-center">
-					<h2>(주)컴트루테크놀로지 - 직원 관리 프로그램</h2>
+					<h2>명우니닷컴 - 직원 관리 프로그램</h2>
 				</div>
 				<!-- 카테고리 별 검색 -->
 				<div
