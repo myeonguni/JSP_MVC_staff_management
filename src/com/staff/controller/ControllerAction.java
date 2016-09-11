@@ -62,7 +62,6 @@ public class ControllerAction extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		requestPro(request, response);
-
 	}
 
 	// 사용자의 요청을 분석해서 해당 작업을 처리

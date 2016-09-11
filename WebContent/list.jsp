@@ -23,7 +23,7 @@
 			<div class="col-sm-10">
 				<!-- 페이지 타이틀 -->
 				<div class="text-center">
-					<h2>(주)컴트루테크놀로 - 직원 관리 프로그램</h2>
+					<h2>(주)컴트루테크놀로지 - 직원 관리 프로그램</h2>
 				</div>
 				<!-- 카테고리 별 검색 -->
 				<div
@@ -71,9 +71,6 @@
 							<select class="form-control" id="extension" name="extension">
 								<option selected value="csv">CSV</option>
 								<option value="xls">XLS</option>
-								<!-- 
-									<option value="xlsx">XLSX(미지원)</option>
-								 -->
 							</select>&nbsp;
 						</div>
 						<div class="form-group">

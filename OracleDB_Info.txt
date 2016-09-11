@@ -1,0 +1,45 @@
+--------------------------------------------------------
+--  DB Connected INFO
+--------------------------------------------------------
+
+	private final String driverName = "oracle.jdbc.driver.OracleDriver";
+	private final String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	private final String db_id = "system";
+	private final String db_pw = "1234";
+
+--------------------------------------------------------
+--  DDL for Table STAFFLIST
+--------------------------------------------------------
+
+  CREATE TABLE "STAFFLIST" 
+   (	"STAFFLIST_INDEX" VARCHAR2(3 BYTE) PRIMARY KEY, 
+	"STAFFLIST_NAME" VARCHAR2(40 BYTE), 
+	"STAFFLIST_POSITION" VARCHAR2(10 BYTE), 
+	"STAFFLIST_TEL" VARCHAR2(18 BYTE), 
+	"STAFFLIST_EMAIL" VARCHAR2(40 BYTE)
+   );
+
+--------------------------------------------------------
+--  DML for Table STAFFLIST
+--------------------------------------------------------
+
+   getStaffListAll()
+    - "select * from stafflist order by stafflist_name asc"
+   getStaffListSearch(String category, String searchTxt)
+    - "select * from stafflist where "+category+" like '%"+searchTxt+"%' order by stafflist_name asc"
+   getStaffAdd(staff Staff)
+    - "INSERT INTO STAFFLIST VALUES(LPAD(STAFFLIST_INDEX_SEQ.NEXTVAL,3,'0'),'"+Staff.getName()+"','"+Staff.getPosition()+"','"+Staff.getTel()+"','"+Staff.getEmail()+"')"
+   getStaffEdit(String index, staff Staff)
+    - "UPDATE STAFFLIST SET STAFFLIST_NAME='"+Staff.getName()+"', STAFFLIST_POSITION='"+Staff.getPosition()+"', STAFFLIST_TEL='"+Staff.getTel()+"', STAFFLIST_EMAIL='"+Staff.getEmail()+"' WHERE STAFFLIST_INDEX='"+index+"'"
+   getStaffDelete(String index)
+    - "DELETE FROM STAFFLIST WHERE STAFFLIST_INDEX='"+index+"'"
+
+--------------------------------------------------------
+--  CREATE SEQUENCE
+--------------------------------------------------------
+
+	CREATE SEQUENCE STAFFLIST_INDEX_SEQ 
+        START WITH 0   
+        INCREMENT BY 1 
+        MAXVALUE NOMAXVALUE 
+        MINVALUE NOMINVALUE
